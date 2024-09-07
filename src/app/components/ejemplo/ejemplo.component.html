@@ -1,0 +1,118 @@
+<!-- <h1>{{ title }}</h1> -->
+
+<!-- <ul> -->
+  <!-- <li *ngFor="let pers of personas">
+    <a *ngIf="pers.edad >= 18" >{{ pers.nombre }}</a>
+    <ng-container *ngIf="pers.edad >= 18"> {{pers.nombre}} </ng-container>
+  </li> -->
+  <!-- <ng-container *ngFor="let pers of personas">
+    <li *ngIf="pers.edad >= 18">{{ pers.nombre }}</li>
+  </ng-container>
+</ul> -->
+
+
+<div class="container">
+  <!-- Button Abrir Modal Agregar Producto -->
+  <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto">
+    Agregar Producto
+  </button>
+
+  <div class="row">
+    <div class="col-12 col-md-4" *ngFor="let prod of productoModelGet">
+      <div class="card text-center mb-3">
+        <div class="card-header">
+          {{ prod._id }}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{prod.nombre}}</h5>
+          <p class="card-text">
+            La cantidad existen es: {{ prod.cantidad }} y su precio es de: {{ prod.precio }}
+          </p>
+
+        </div>
+        <div class="card-footer text-muted">
+          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <button type="button" class="btn btn-danger" (click)="deleteProductos(prod._id)">Eliminar</button>
+
+            <button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+            aria-controls="offcanvasExample" (click)="getProductosId(prod._id)">
+              Editar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal Agregar Producto -->
+<div class="modal fade" id="modalAgregarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputNombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="inputNombre" name="nombre" #nombre="ngModel"
+            [(ngModel)]="productoModelPost.nombre">
+          </div>
+          <div class="mb-3">
+            <label for="inputCantidad" class="form-label">Cantidad</label>
+            <input type="text" class="form-control" id="inputCantidad" name="cantidad" #cantidad="ngModel"
+            [(ngModel)]="productoModelPost.cantidad">
+          </div>
+          <div class="mb-3">
+            <label for="inputPrecio" class="form-label">Precio</label>
+            <input type="text" class="form-control" id="inputPrecio" name="precio" #precio="ngModel"
+            [(ngModel)]="productoModelPost.precio">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="postProductos()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Editar Producto -->
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar producto</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form>
+      <div class="mb-3">
+        <label for="inputNombre" class="form-label">Nombre producto</label>
+        <input type="text" class="form-control" id="inputNombre">
+      </div>
+      <div class="mb-3">
+        <label for="inputCantidad" class="form-label">Cantidad producto</label>
+        <input type="number" class="form-control" id="inputCantidad">
+      </div>
+
+      <div class="mb-3">
+        <label for="inputVendido" class="form-label">Producto vendido</label>
+        <input type="text" class="form-control" id="inputVendido">
+      </div>
+
+      <div class="mb-3">
+        <label for="inputPrecio" class="form-label">Precio producto</label>
+        <input type="number" class="form-control" id="inputPrecio">
+      </div>
+
+      <button class="btn btn-success" data-bs-dismiss="offcanvas">Editar producto</button>
+    </form>
+
+  </div>
+</div>
+
